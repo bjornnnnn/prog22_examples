@@ -28,9 +28,10 @@ namespace SignalRChat.Hubs
         {
             await Clients.All.SendAsync("ReceiveMessage2", user, message);
         }
-        
+
         public async Task SendPrivateMessage(string groupName, string user, string message ){
             await Clients.Group(groupName).SendAsync("ReceiveMessage", user, message);
         }
+
     }
 }
