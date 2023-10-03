@@ -1,5 +1,14 @@
 # JWT
 
+## Skapa kodstruktur
+
+Skriv följande kommandon i ett kommandointerface:
+
+    dotnet new web -o MyJWT
+    cd MyJWT
+    dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+
+## Skapa en JWT-token
 Skapa en JWT-token för din användare genom att använda det inbygda kommandot "dotnet user-jwts create":
 
     $ dotnet user-jwts create 
@@ -28,7 +37,7 @@ Lista information om den skapade JWT-token såhär:
     Token Payload: {"unique_name":"bjornn","sub":"bjornn","jti":"2e3e9370","aud":["http://localhost:40144","https://localhost:44366","http://localhost:5038","https://localhost:7262"],"nbf":1696170634,"exp":1704119434,"iat":1696170635,"iss":"dotnet-user-jwts"}
     Compact Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImJqb3JubiIsInN1YiI6ImJqb3JubiIsImp0aSI6IjJlM2U5MzcwIiwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3Q6NDAxNDQiLCJodHRwczovL2xvY2FsaG9zdDo0NDM2NiIsImh0dHA6Ly9sb2NhbGhvc3Q6NTAzOCIsImh0dHBzOi8vbG9jYWxob3N0OjcyNjIiXSwibmJmIjoxNjk2MTcwNjM0LCJleHAiOjE3MDQxMTk0MzQsImlhdCI6MTY5NjE3MDYzNSwiaXNzIjoiZG90bmV0LXVzZXItand0cyJ9.SapbJ7OhyRl-ZA1kHIs9dgjsnxt_isSsbhJoIIP8r9o
 
-## I koden:
+## Komplettera koden:
 Kontrollera om följande instruktion redan finns. Annars lägg till den i middleware-klassen: 
 
     app.UseHttpsRedirection();
@@ -46,3 +55,5 @@ För att göra anrop mot en http-endpoint som kräver JWT-autentisering gör man
 Använd token genom att skicka den i en http-header med ett https-get-anrop exempelvis såhär:
 
     curl -i -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImJqb3JubiIsInN1YiI6ImJqb3JubiIsImp0aSI6IjJlM2U5MzcwIiwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3Q6NDAxNDQiLCJodHRwczovL2xvY2FsaG9zdDo0NDM2NiIsImh0dHA6Ly9sb2NhbGhvc3Q6NTAzOCIsImh0dHBzOi8vbG9jYWxob3N0OjcyNjIiXSwibmJmIjoxNjk2MTcwNjM0LCJleHAiOjE3MDQxMTk0MzQsImlhdCI6MTY5NjE3MDYzNSwiaXNzIjoiZG90bmV0LXVzZXItand0cyJ9.SapbJ7OhyRl-ZA1kHIs9dgjsnxt_isSsbhJoIIP8r9o" https://localhost:7262/secret
+
+Om man inte får det att fungera (windows), så funkar det med Postman.
