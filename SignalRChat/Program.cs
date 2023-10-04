@@ -1,17 +1,58 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using SignalRChat.Controllers;
 using SignalRChat.Hubs;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
-// Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
 builder.Services.AddControllers();
 
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                var accessToken = context.Request.Query["access_token"];
+                if (!string.IsNullOrEmpty(accessToken))
+                {
+                    context.Token = accessToken;
+                }
+                return Task.CompletedTask;
+            }
+        };
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = configuration["Jwt:Issuer"],
+            ValidAudience = configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!))
+        };
+    });
+
+
+
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
@@ -24,6 +65,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
@@ -31,15 +73,5 @@ app.MapRazorPages();
 app.MapHub<ChatHub>("/ChatHub");
 app.MapControllers();
 
-/* app.Use(async (context, next) =>
-{
-   var hubContext = context.RequestServices.GetRequiredService<IHubContext<ChatHub>>();
-    hubContext.Index();
-    
-    if (next != null)
-    {
-        await next.Invoke();
-    }
-});
- */
+
 app.Run();
