@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpsConfiguration", "..\Ht
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSP", "..\CSP\CSP.csproj", "{0C3BA52F-A1A3-4293-A4A9-0791E09FE3ED}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Validering", "..\..\Datakommunikation\3.1Labb7\Validering.csproj", "{B0A42C7C-8BC3-4BCA-B5BC-6EEF3BB70171}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation", "..\Validation\Validation.csproj", "{0BA1DB83-536C-4665-A8D6-A87E029DCE31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{0C3BA52F-A1A3-4293-A4A9-0791E09FE3ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C3BA52F-A1A3-4293-A4A9-0791E09FE3ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C3BA52F-A1A3-4293-A4A9-0791E09FE3ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0A42C7C-8BC3-4BCA-B5BC-6EEF3BB70171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0A42C7C-8BC3-4BCA-B5BC-6EEF3BB70171}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0A42C7C-8BC3-4BCA-B5BC-6EEF3BB70171}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0A42C7C-8BC3-4BCA-B5BC-6EEF3BB70171}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BA1DB83-536C-4665-A8D6-A87E029DCE31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BA1DB83-536C-4665-A8D6-A87E029DCE31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BA1DB83-536C-4665-A8D6-A87E029DCE31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BA1DB83-536C-4665-A8D6-A87E029DCE31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
